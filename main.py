@@ -19,13 +19,17 @@ class Person(db.Model):
         return f'<Person ID: {self.id}, name: {self.name}>'
 
 
+# Create all the tables
 db.create_all()
 
+# Insert into the database
+person = Person(name='Amy')
+db.session.add(person)
+db.session.commit()
 
-""" @app.route is a decorator that takes an input function index() 
-as the callback that gets invoked when a request to (route /) comes in from a client."""
 
-
+# @app.route is a decorator that takes an input function index()
+# as the callback that gets invoked when a request to (route /) comes in from a client.
 @app.route('/')
 def index():
     person = Person.query.first()
